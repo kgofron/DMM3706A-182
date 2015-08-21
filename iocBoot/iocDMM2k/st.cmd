@@ -57,3 +57,7 @@ iocInit
 #seq &Keithley2kDMM, "P=13Keithley1:, Dmm=DMM1, channels=22, model=2700, stack=10000"
 #doAfterIocInit()
 seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=1, model=2000"
+
+cd ${TOP}
+dbl > ./records.dbl
+#system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
