@@ -39,6 +39,7 @@ DMM2k_DBD += xxxSupport.dbd
 DMM2k_DBD += dbSubExample.dbd
 DMM2k_DBD += DMM2kHello.dbd
 DMM2k_DBD += initTrace.dbd
+DMM2k_DBD += system.dbd
 
 DMM2k_DBD += asyn.dbd
 DMM2k_DBD += drvAsynSerialPort.dbd 
