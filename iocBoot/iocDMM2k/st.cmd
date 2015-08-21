@@ -60,4 +60,4 @@ seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=1, model=2000"
 
 cd ${TOP}
 dbl > ./records.dbl
-#system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
+system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
