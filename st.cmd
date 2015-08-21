@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /epics/iocs/DMM2k && ./st.cmd
+cd iocBoot/iocDMM2k && ./st.cmd
 
