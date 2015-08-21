@@ -1,0 +1,13 @@
+syntax: glob
+db/
+dbd/
+O.linux-x86_64/
+O.Common/
+envPaths
+bin/
+lib/
+include/
+records.dbl
+
+syntax: regexp
+^pmc/
