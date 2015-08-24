@@ -8,12 +8,13 @@
 epicsEnvSet("ENGINEER",  "kgofron x5283")
 epicsEnvSet("LOCATION",  "740 IXS RG:D1")
 #epicsEnvSet("STREAM_PROTOCOL_PATH", ".:../protocols:$(PMACUTIL)/protocol")
+epicsEnvSet("KP_PORT",   "K0")
 epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
 epicsEnvSet("EPICS_CA_ADDR_LIST", "10.10.0.255")
 
 epicsEnvSet("P",         "XF:10IDD-BI")
-epicsEnvSet("R",         "{DMM:1-K2000}")
-# epicsEnvSet("IOCNAME",   "k2000")
+epicsEnvSet("R",         "{DMM:2-K3706A}")
+# epicsEnvSet("IOCNAME",   "k3706")
 
 cd ${TOP}
 
@@ -22,18 +23,20 @@ dbLoadDatabase "dbd/DMM2k.dbd"
 DMM2k_registerRecordDeviceDriver pdbbase
 
 ############ Asyn Communication Config ############
-# cfg comms for Keithley 2000 controllers
-drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
+# cfg comms for Keithley 3706A controllers
+#drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
 #drvAsynIPPortConfigure("tsrv2-P4","10.10.2.54:4004")
+drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183")
 
 ## Load record instances
 #dbLoadTemplate "db/userHost.substitutions"
 #dbLoadRecords "db/dbSubExample.db", "user=kgofronHost"
 
-# Keithley 2000 DMM
+# Keithley 3706A DMM
 #dbLoadRecords("$(IP)/ipApp/Db/Keithley2kDMM_mf.db","P=xxx:,Dmm=D1,PORT=serial1")
-dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P3")
+#dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P3")
 #dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P4")
+dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
 
 ### Load asynRecords for general comms to each PORT
 #dbLoadRecords("db/asyn.db")
@@ -56,8 +59,8 @@ iocInit
 
 #seq &Keithley2kDMM, "P=13Keithley1:, Dmm=DMM1, channels=22, model=2700, stack=10000"
 #doAfterIocInit()
-seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=1, model=2000"
+seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=20, model=3706A"
 
 cd ${TOP}
 dbl > ./records.dbl
-system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
+#system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"

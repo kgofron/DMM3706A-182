@@ -1,4 +1,4 @@
-NAME=dmm1-K2000
+NAME=dmm1-K3706A
 USER=softioc
-PORT=4502
+PORT=4504
 HOST=xf10idb-ioc1
