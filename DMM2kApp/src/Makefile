@@ -40,6 +40,7 @@ DMM2k_DBD += dbSubExample.dbd
 DMM2k_DBD += DMM2kHello.dbd
 DMM2k_DBD += initTrace.dbd
 DMM2k_DBD += system.dbd
+DMM2k_DBD += Keithley3706A.dbd
 
 DMM2k_DBD += asyn.dbd
 DMM2k_DBD += drvAsynSerialPort.dbd 
@@ -50,6 +51,8 @@ DMM2k_DBD += ipSupport.dbd
 
 # DMM2k_registerRecordDeviceDriver.cpp derives from DMM2k.dbd
 DMM2k_SRCS += DMM2k_registerRecordDeviceDriver.cpp
+
+DMM2k_SRCS += Keithley3706A.st
 
 # Build the main IOC entry point on workstation OSs.
 DMM2k_SRCS_DEFAULT += DMM2kMain.cpp
@@ -81,6 +84,13 @@ ifneq ($(SNCSEQ),)
     sncProgram_SRCS += sncProgram.st
     sncProgram_LIBS += seq pv
     sncProgram_LIBS += $(EPICS_BASE_HOST_LIBS)
+
+    # Build sncProgram as a standalone program
+#    PROD_HOST += Keithley3706A
+#    Keithley3706A_SNCFLAGS += +m
+#    Keithley3706A_SRCS += Keithley3706A.st
+#    Keithley3706A_LIBS += seq pv
+#    Keithley3706A_LIBS += $(EPICS_BASE_HOST_LIBS)
 endif
 
 # Finally link to the EPICS Base libraries

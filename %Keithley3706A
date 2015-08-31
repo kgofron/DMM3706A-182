@@ -2,4 +2,17 @@
 
 HRM sensors read by this Keithley 3706A (hutch B)
 Spectrometer sensors read by this Keithley 3706A (hutch D)
-
+=============
+kgofron@xf10idb-ioc1:/epics/iocs/DMM3706A$ telnet 10.10.2.183 5025
+Trying 10.10.2.183...
+Connected to 10.10.2.183.
+Escape character is '^]'.
+*IDN?
+KEITHLEY INSTRUMENTS INC.,MODEL 3706A,01384518,01.50f
+for x=1,6 do print (slot[x].idn) end
+3724,Dual 1x30 FET Multiplexer,01.40j,1368080
+Empty Slot
+Empty Slot
+Empty Slot
+Empty Slot
+Empty Slot

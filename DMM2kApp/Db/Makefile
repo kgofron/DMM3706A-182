@@ -13,6 +13,7 @@ include $(TOP)/configure/CONFIG
 DB += dbExample1.db
 DB += dbExample2.db
 DB += dbSubExample.db
+DB += Keithley3706DMM_mf.db
 DB += user.substitutions
 DB += userHost.substitutions
 

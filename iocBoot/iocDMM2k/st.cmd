@@ -8,7 +8,7 @@
 epicsEnvSet("ENGINEER",  "kgofron x5283")
 epicsEnvSet("LOCATION",  "740 IXS RG:D1")
 #epicsEnvSet("STREAM_PROTOCOL_PATH", ".:../protocols:$(PMACUTIL)/protocol")
-epicsEnvSet("KP_PORT",   "K0")
+epicsEnvSet("KP_PORT",   "DMM3706A")
 epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
 epicsEnvSet("EPICS_CA_ADDR_LIST", "10.10.0.255")
 
@@ -26,7 +26,7 @@ DMM2k_registerRecordDeviceDriver pdbbase
 # cfg comms for Keithley 3706A controllers
 #drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
 #drvAsynIPPortConfigure("tsrv2-P4","10.10.2.54:4004")
-drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183")
+drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
 
 ## Load record instances
 #dbLoadTemplate "db/userHost.substitutions"
@@ -36,7 +36,8 @@ drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183")
 #dbLoadRecords("$(IP)/ipApp/Db/Keithley2kDMM_mf.db","P=xxx:,Dmm=D1,PORT=serial1")
 #dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P3")
 #dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P4")
-dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
+#dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
+dbLoadRecords("db/Keithley3706DMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
 
 ### Load asynRecords for general comms to each PORT
 #dbLoadRecords("db/asyn.db")
@@ -44,6 +45,10 @@ dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP
 ### devIocStats
 #dbLoadRecords("${EPICS_BASE}/db/iocAdminSoft.db", "IOC=XF:10IDB-CT{DMM:1}")
 ###################################################
+
+# asyn debug traces
+asynSetTraceMask("$(KP_PORT)",-1,0x9)
+asynSetTraceIOMask("$(KP_PORT)",-1,0x2)
 
 ## Set this to see messages from mySub
 #var mySubDebug 1
@@ -59,7 +64,9 @@ iocInit
 
 #seq &Keithley2kDMM, "P=13Keithley1:, Dmm=DMM1, channels=22, model=2700, stack=10000"
 #doAfterIocInit()
-seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=20, model=3706A"
+#seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=20, model=3706A"
+seq Keithley3706A, "P=$(P), Dmm=$(R), channels=20, model=3706A"
+#seq sncExample, "P=$(P), Dmm=$(R), channels=20, model=3706A"
 
 cd ${TOP}
 dbl > ./records.dbl
