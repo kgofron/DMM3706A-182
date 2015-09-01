@@ -12,8 +12,8 @@ epicsEnvSet("KP_PORT",   "DMM3706A")
 epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
 epicsEnvSet("EPICS_CA_ADDR_LIST", "10.10.0.255")
 
-epicsEnvSet("P",         "XF:10IDD-BI")
-epicsEnvSet("R",         "{DMM:2-K3706A}")
+epicsEnvSet("P",         "XF:10IDB-BI")
+epicsEnvSet("R",         "{DMM:1-K3706A}")
 # epicsEnvSet("IOCNAME",   "k3706")
 
 cd ${TOP}
@@ -37,7 +37,8 @@ drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
 #dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P3")
 #dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=tsrv2-P4")
 #dbLoadRecords("/usr/lib/epics/db/Keithley2kDMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
-dbLoadRecords("db/Keithley3706DMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
+#dbLoadRecords("db/Keithley3706DMM_mf.db","P=$(P),Dmm=$(R),PORT=$(KP_PORT)")
+dbLoadTemplate("db/Keithley3706A.substitutions")
 
 ### Load asynRecords for general comms to each PORT
 #dbLoadRecords("db/asyn.db")
