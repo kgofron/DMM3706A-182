@@ -1,0 +1,28 @@
+file "db/Keithley3706A.db"
+{
+pattern
+{P,              Dmm,               CH,	PORT,	DESC,            EGU,		PREC,  ALIAS }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  1,  "DMM3706A",   "Ch1 desc",		 "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  2,  "DMM3706A",   "Ch2 desc", 		 "deg", 	5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  3,  "DMM3706A",   "Ch3 desc",     	 "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  4,  "DMM3706A",   "Ch4 desc",     	 "urad", 	5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  5,  "DMM3706A",   "Ch5 desc",      	 "urad", 	5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  6,  "DMM3706A",   "Ch6 desc",  	 "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  7,  "DMM3706A",   "Ch7 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  8,  "DMM3706A",   "Ch8 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  9,  "DMM3706A",   "Ch9 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  10, "DMM3706A",   "Ch10 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  11, "DMM3706A",   "Ch11 desc",		 "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  12, "DMM3706A",   "Ch12 desc", 		 "deg", 	5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  13, "DMM3706A",   "Ch13 desc",     	 "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  14, "DMM3706A",   "Ch14 desc",     	 "urad", 	5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  15, "DMM3706A",   "Ch15 desc",      	 "urad", 	5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  16, "DMM3706A",   "Ch16 desc",  	 "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  17, "DMM3706A",   "Ch17 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  18, "DMM3706A",   "Ch18 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  19, "DMM3706A",   "Ch19 desc",           "mm", 		5,     ""    }
+{"XF:10IDB-BI",  "{DMM:1-K3706A}",  20, "DMM3706A",   "Ch20 desc",           "mm", 		5,     ""    }
+
+#{$(Sys),  $(Dev),  1,     "Ch1 desc",		 "mm", 		5,     ""    }
+}
+

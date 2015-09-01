@@ -1,0 +1,299 @@
+grecord(stringin,"$(P)$(Dmm)model") {
+	field(VAL,"2000")
+}
+grecord(ai,"$(P)$(Dmm)channels") {
+	field(VAL,"10")
+}
+grecord(bo,"$(P)$(Dmm)init_dmm") {
+}
+grecord(stringout,"$(P)$(Dmm)init_string") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"Reset()")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(bo,"$(P)$(Dmm)done_read") {
+	field(ZNAM,"DONE")
+	field(ONAM,"READ")
+}
+grecord(bo,"$(P)$(Dmm)scanner") {
+        field(VAL, "1")
+	field(OUT,"$(P)$(Dmm)done_read.VAL  PP MS")
+}
+grecord(bo,"$(P)$(Dmm)onesh_cont") {
+	field(OUT,"$(P)$(Dmm)scanner.SCAN  NPP NMS")
+	field(ZNAM,"ONE SH.")
+	field(ONAM,"CONT.")
+}
+grecord(bo,"$(P)$(Dmm)single_multi") {
+	field(ZNAM,"SINGLE")
+	field(ONAM,"MULT.")
+}
+grecord(bo,"$(P)$(Dmm)Dmm_on_off") {
+	field(ZNAM,"ON")
+	field(ONAM,"OFF")
+}
+grecord(bo,"$(P)$(Dmm)Ch22_on_off") {
+        field(ZNAM,"ON")
+        field(ONAM,"OFF")
+}
+grecord(bo,"$(P)$(Dmm)Ch21_on_off") {
+        field(ZNAM,"ON")
+        field(ONAM,"OFF")
+}
+grecord(bo,"$(P)$(Dmm)Ch$(CH)_on_off") {
+	field(ZNAM,"ON")
+	field(ONAM,"OFF")
+}
+
+grecord(calc,"$(P)$(Dmm)Dmm_raw") {
+	field(DESC,"Dmm raw desc")
+	field(FLNK,"$(P)$(Dmm)Dmm_calc  PP MS")
+	field(CALC,"A*1.0")
+	field(INPA,"$(P)$(Dmm)dmm_get_str.VAL  NPP NMS")
+	field(PREC,"4")
+}
+grecord(calcout,"$(P)$(Dmm)Dmm_calc") {
+	field(DESC,"Dmm Units")
+	field(CALC,"A")
+	field(INPA,"$(P)$(Dmm)Dmm_raw.VAL  NPP NMS")
+	field(PREC,"4")
+}
+grecord(calc,"$(P)$(Dmm)Ch22_raw") {
+        field(DESC,"Ch22 desc")
+        field(FLNK,"$(P)$(Dmm)Ch22_calc  PP MS")
+        field(CALC,"A*1.0")
+        field(INPA,"$(P)$(Dmm)dmm_get_str.VAL  NPP NMS")
+        field(PREC,"4")
+}
+grecord(calcout,"$(P)$(Dmm)Ch22_calc") {
+        field(DESC,"Ch22 Units")
+        field(CALC,"A")
+        field(INPA,"$(P)$(Dmm)Ch22_raw.VAL  NPP NMS")
+        field(PREC,"4")
+}
+grecord(calc,"$(P)$(Dmm)Ch21_raw") {
+        field(DESC,"Ch21 desc")
+        field(FLNK,"$(P)$(Dmm)Ch21_calc  PP MS")
+        field(CALC,"A*1.0")
+        field(INPA,"$(P)$(Dmm)dmm_get_str.VAL  NPP NMS")
+        field(PREC,"4")
+}
+grecord(calcout,"$(P)$(Dmm)Ch21_calc") {
+        field(DESC,"Ch21 Units")
+        field(CALC,"A")
+        field(INPA,"$(P)$(Dmm)Ch21_raw.VAL  NPP NMS")
+        field(PREC,"4")
+}
+
+grecord(calc,"$(P)$(Dmm)Ch$(CH)_raw") {
+	field(DESC,"Ch$(CH) desc")
+	field(FLNK,"$(P)$(Dmm)Ch$(CH)_calc  PP MS")
+	field(CALC,"A*1.0")
+	field(INPA,"$(P)$(Dmm)dmm_get_str.VAL  NPP NMS")
+	field(PREC,"4")
+}
+grecord(calcout,"$(P)$(Dmm)Ch$(CH)_calc") {
+	field(DESC,"Ch$(CH) Units")
+	field(CALC,"A")
+	field(INPA,"$(P)$(Dmm)Ch$(CH)_raw.VAL  NPP NMS")
+	field(PREC,"4")
+}
+grecord(mbbo,"$(P)$(Dmm)ch_mode_sel") {
+	field(ZRST,"V DC")
+	field(ONST,"V AC")
+	field(TWST,"OHM 2W")
+	field(THST,"OHM 4W")
+	field(FRST,"FREQ")
+	field(FVST,"TEMP J")
+	field(SXST,"TEMP K")
+	field(SVST,"TEMP N")
+	field(EIST,"TEMP T")
+	field(NIST,"TEMP E")
+	field(TEST,"TEMP R")
+	field(ELST,"TEMP S")
+	field(TVST,"TEMP B")
+	field(TTST,"A DC")
+	field(FTST,"A AC")
+}
+grecord(mbbo,"$(P)$(Dmm)ch$(CH)_mode_sel") {
+	field(ZRST,"V DC")
+	field(ONST,"V AC")
+	field(TWST,"OHM 2W")
+	field(THST,"OHM 4W")
+	field(FRST,"FREQ")
+	field(FVST,"TEMP J")
+	field(SXST,"TEMP K")
+	field(SVST,"TEMP N")
+	field(EIST,"TEMP T")
+	field(NIST,"TEMP E")
+	field(TEST,"TEMP R")
+	field(ELST,"TEMP S")
+	field(TVST,"TEMP B")
+	field(TTST,"A DC")
+	field(FTST,"A AC")
+}
+grecord(mbbo,"$(P)$(Dmm)ch21_mode_sel") {
+        field(ZRST,"A DC")
+        field(ONST,"A AC")
+}
+grecord(mbbo,"$(P)$(Dmm)ch22_mode_sel") {
+        field(ZRST,"A DC")
+        field(ONST,"A AC")
+}
+
+grecord(mbbo,"$(P)$(Dmm)dmm_chan") {
+	field(PINI,"YES")
+	field(ZRST,"Ch1")
+	field(ONST,"Ch2")
+	field(TWST,"Ch3")
+	field(THST,"Ch4")
+	field(FRST,"Ch5")
+	field(FVST,"Ch6")
+	field(SXST,"Ch7")
+	field(SVST,"Ch8")
+	field(EIST,"Ch9")
+	field(NIST,"Ch10")
+}
+grecord(mbbo,"$(P)$(Dmm)dmm_chan2") {
+	field(ZRST,"Ch11")
+	field(ONST,"Ch12")
+	field(TWST,"Ch13")
+	field(THST,"Ch14")
+	field(FRST,"Ch15")
+	field(FVST,"Ch16")
+	field(SXST,"Ch17")
+	field(SVST,"Ch18")
+	field(EIST,"Ch19")
+	field(NIST,"Ch20")
+        field(TEST,"Ch21")
+        field(ELST,"Ch22")
+}
+grecord(mbbo,"$(P)$(Dmm)dmm_ch_range") {
+	field(ZRST,"1-10")
+	field(ONST,"11-22")
+}
+
+grecord(stringin,"$(P)$(Dmm)units") {
+	field(VAL,"VDC")
+}
+grecord(stringin,"$(P)$(Dmm)ch$(CH)_units") {
+	field(VAL,"VDC")
+}
+grecord(stringin,"$(P)$(Dmm)ch21_units") {
+        field(VAL,"A DC")
+}
+grecord(stringin,"$(P)$(Dmm)ch22_units") {
+        field(VAL,"A DC")
+}
+grecord(seq,"$(P)$(Dmm)dmm_delay_read") {
+        field(DLY1, "0.1")
+        field(DOL1,"1")
+        field(LNK1,"$(P)$(Dmm)dmm_read.PROC  PP MS")
+}
+grecord(stringout,"$(P)$(Dmm)dmm_read") {
+	field(DTYP,"asyn so stringParm")
+	field(FLNK,"$(P)$(Dmm)dmm_get_str.VAL  PP MS")
+	field(VAL,"print(dmm.measure())")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringin,"$(P)$(Dmm)dmm_get_str") {
+	field(DTYP,"asyn si stringParm")
+	field(INP,"@asyn($(PORT))TERM=0a,TO=10000")
+	field(FLNK,"$(P)$(Dmm)read_finished.VAL  PP MS")
+}
+grecord(bo,"$(P)$(Dmm)read_finished") {
+        field(VAL, "1")
+	field(OUT,"$(P)$(Dmm)read_complete.VAL  PP MS")
+}
+grecord(bo,"$(P)$(Dmm)read_complete") {
+	field(ZNAM,"READING")
+	field(ONAM,"DONE")
+}
+grecord(stringout,"$(P)$(Dmm)general_input") {
+	field(DTYP,"asyn so stringParm")
+	field(FLNK,"$(P)$(Dmm)dmm_get_str.VAL  PP MS")
+	field(VAL,"Reset()")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)ch_close") {
+	field(DTYP,"asyn so stringParm")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_dcv") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='dcvolts'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_acv") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='acvolts'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_dci") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='dccurrent'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_aci") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='accurrent'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_ohm4w") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='fourwireohms'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_ohm2w") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='twowireohms'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_freq") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='frequency'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_tempj") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_tempk") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_tempn") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+
+grecord(stringout,"$(P)$(Dmm)conf_tempt") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+
+grecord(stringout,"$(P)$(Dmm)conf_tempe") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+
+grecord(stringout,"$(P)$(Dmm)conf_tempr") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_temps") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
+grecord(stringout,"$(P)$(Dmm)conf_tempb") {
+	field(DTYP,"asyn so stringParm")
+	field(VAL,"dmm.func='temperature'")
+	field(OUT,"@asyn($(PORT))TERM=0a")
+}
