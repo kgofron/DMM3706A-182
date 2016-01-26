@@ -48,9 +48,12 @@ DMM2k_DBD += drvAsynIPPort.dbd
 DMM2k_DBD += devEpics.dbd 
 DMM2k_DBD += devGpib.dbd 
 DMM2k_DBD += ipSupport.dbd
+DMM2k_DBD += calcSupport.dbd
+#DMM2k_DBD += sseqRecord.dbd
 
 # DMM2k_registerRecordDeviceDriver.cpp derives from DMM2k.dbd
 DMM2k_SRCS += DMM2k_registerRecordDeviceDriver.cpp
+#DMM2k_SRCS += sseqRecord.c
 
 DMM2k_SRCS += Keithley3706A.st
 
@@ -65,7 +68,7 @@ DMM2k_SRCS_vxWorks += -nil-
 DMM2k_LIBS += DMM2kSupport
 DMM2k_LIBS += ip
 DMM2k_LIBS += asyn
-DMM2k_LIBS += seq pv
+DMM2k_LIBS += seq pv calc
 
 # NOTE: To build SNL programs, SNCSEQ must be defined
 # in the <top>/configure/RELEASE file

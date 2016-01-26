@@ -31,13 +31,16 @@ program Keithley3706A ("P=XF:10IDD-BI, Dmm={DMM:2-K3706A}, channels=10, model=37
  *                   in this mode.
  * 07-NOV-2002 MLR   Added support for single channel selection of channels 11-22.
  * 18-JUL-2006 MLR   Added support for additional thermocouple types for 2700.
+ * 1-SEP-2015 KJG    Kaz Gofron made major changes to support TSP communication used in newer Keithley devices. 
+ * 	      	     Driver will no longer work with SCPI/ICL commands (Keithley 2000/2700.
+ * 	      	     Support for Keithley 3706A multimeter, and 60 channels read via card.
 */
 
 /* This program must be compiled with the recursive option so that multiple copies
  * can run at once */
 option +r;
 
-#define MAX_CHANNELS 22
+#define MAX_CHANNELS 60
 #define NUM_FRONT_MODES 15
 #define NUM_REAR_MODES 8
 %% #include "stdlib.h"
@@ -70,8 +73,46 @@ assign  ch_mode to
             "{P}{Dmm}ch18_mode_sel.VAL",
             "{P}{Dmm}ch19_mode_sel.VAL",
             "{P}{Dmm}ch20_mode_sel.VAL",
-            "{P}{Dmm}ch21_mode_sel.VAL",
-            "{P}{Dmm}ch22_mode_sel.VAL"};
+            "{P}{Dmm}ch21_mode_sel.VAL",	
+            "{P}{Dmm}ch22_mode_sel.VAL",
+            "{P}{Dmm}ch23_mode_sel.VAL",
+            "{P}{Dmm}ch24_mode_sel.VAL",
+            "{P}{Dmm}ch25_mode_sel.VAL",
+            "{P}{Dmm}ch26_mode_sel.VAL",
+            "{P}{Dmm}ch27_mode_sel.VAL",
+            "{P}{Dmm}ch28_mode_sel.VAL",
+            "{P}{Dmm}ch29_mode_sel.VAL",
+            "{P}{Dmm}ch30_mode_sel.VAL",	
+            "{P}{Dmm}ch31_mode_sel.VAL",
+            "{P}{Dmm}ch32_mode_sel.VAL",
+            "{P}{Dmm}ch33_mode_sel.VAL",
+            "{P}{Dmm}ch34_mode_sel.VAL",
+            "{P}{Dmm}ch35_mode_sel.VAL",
+            "{P}{Dmm}ch36_mode_sel.VAL",
+            "{P}{Dmm}ch37_mode_sel.VAL",
+            "{P}{Dmm}ch38_mode_sel.VAL",
+            "{P}{Dmm}ch39_mode_sel.VAL",
+            "{P}{Dmm}ch40_mode_sel.VAL",
+            "{P}{Dmm}ch41_mode_sel.VAL",	
+            "{P}{Dmm}ch42_mode_sel.VAL",
+            "{P}{Dmm}ch43_mode_sel.VAL",
+            "{P}{Dmm}ch44_mode_sel.VAL",
+            "{P}{Dmm}ch45_mode_sel.VAL",
+            "{P}{Dmm}ch46_mode_sel.VAL",
+            "{P}{Dmm}ch47_mode_sel.VAL",
+            "{P}{Dmm}ch48_mode_sel.VAL",
+            "{P}{Dmm}ch49_mode_sel.VAL",
+            "{P}{Dmm}ch50_mode_sel.VAL",	
+            "{P}{Dmm}ch51_mode_sel.VAL",	
+            "{P}{Dmm}ch52_mode_sel.VAL",
+            "{P}{Dmm}ch53_mode_sel.VAL",
+            "{P}{Dmm}ch54_mode_sel.VAL",
+            "{P}{Dmm}ch55_mode_sel.VAL",
+            "{P}{Dmm}ch56_mode_sel.VAL",
+            "{P}{Dmm}ch57_mode_sel.VAL",
+            "{P}{Dmm}ch58_mode_sel.VAL",
+            "{P}{Dmm}ch59_mode_sel.VAL",
+            "{P}{Dmm}ch60_mode_sel.VAL"};	
 monitor ch_mode;
 evflag  ch_mode_mon;
 sync    ch_mode ch_mode_mon;
@@ -99,7 +140,45 @@ assign  ch_on_off to
             "{P}{Dmm}Ch19_on_off.VAL",
             "{P}{Dmm}Ch20_on_off.VAL",
             "{P}{Dmm}Ch21_on_off.VAL",
-            "{P}{Dmm}Ch22_on_off.VAL"};
+            "{P}{Dmm}Ch22_on_off.VAL",
+            "{P}{Dmm}Ch23_on_off.VAL",
+            "{P}{Dmm}Ch24_on_off.VAL",
+            "{P}{Dmm}Ch25_on_off.VAL",
+            "{P}{Dmm}Ch26_on_off.VAL",
+            "{P}{Dmm}Ch27_on_off.VAL",
+            "{P}{Dmm}Ch28_on_off.VAL",
+            "{P}{Dmm}Ch29_on_off.VAL",
+            "{P}{Dmm}Ch30_on_off.VAL",
+            "{P}{Dmm}Ch31_on_off.VAL",
+            "{P}{Dmm}Ch32_on_off.VAL",
+            "{P}{Dmm}Ch33_on_off.VAL",
+            "{P}{Dmm}Ch34_on_off.VAL",
+            "{P}{Dmm}Ch35_on_off.VAL",
+            "{P}{Dmm}Ch36_on_off.VAL",
+            "{P}{Dmm}Ch37_on_off.VAL",
+            "{P}{Dmm}Ch38_on_off.VAL",
+            "{P}{Dmm}Ch39_on_off.VAL",
+            "{P}{Dmm}Ch40_on_off.VAL",
+            "{P}{Dmm}Ch41_on_off.VAL",
+            "{P}{Dmm}Ch42_on_off.VAL",
+            "{P}{Dmm}Ch43_on_off.VAL",
+            "{P}{Dmm}Ch44_on_off.VAL",
+            "{P}{Dmm}Ch45_on_off.VAL",
+            "{P}{Dmm}Ch46_on_off.VAL",
+            "{P}{Dmm}Ch47_on_off.VAL",
+            "{P}{Dmm}Ch48_on_off.VAL",
+            "{P}{Dmm}Ch49_on_off.VAL",
+            "{P}{Dmm}Ch50_on_off.VAL",
+            "{P}{Dmm}Ch51_on_off.VAL",
+            "{P}{Dmm}Ch52_on_off.VAL",
+            "{P}{Dmm}Ch53_on_off.VAL",
+            "{P}{Dmm}Ch54_on_off.VAL",
+            "{P}{Dmm}Ch55_on_off.VAL",
+            "{P}{Dmm}Ch56_on_off.VAL",
+            "{P}{Dmm}Ch57_on_off.VAL",
+            "{P}{Dmm}Ch58_on_off.VAL",
+            "{P}{Dmm}Ch59_on_off.VAL",
+            "{P}{Dmm}Ch60_on_off.VAL"};
 monitor ch_on_off;
 
 int    ch_raw[MAX_CHANNELS];
@@ -125,7 +204,45 @@ assign  ch_raw to
             "{P}{Dmm}Ch19_raw.PROC",
             "{P}{Dmm}Ch20_raw.PROC",
             "{P}{Dmm}Ch21_raw.PROC",
-            "{P}{Dmm}Ch22_raw.PROC"};
+            "{P}{Dmm}Ch22_raw.PROC",
+            "{P}{Dmm}Ch23_raw.PROC",
+            "{P}{Dmm}Ch24_raw.PROC",
+            "{P}{Dmm}Ch25_raw.PROC",
+            "{P}{Dmm}Ch26_raw.PROC",
+            "{P}{Dmm}Ch27_raw.PROC",
+            "{P}{Dmm}Ch28_raw.PROC",
+            "{P}{Dmm}Ch29_raw.PROC",
+            "{P}{Dmm}Ch30_raw.PROC",
+            "{P}{Dmm}Ch31_raw.PROC",
+            "{P}{Dmm}Ch32_raw.PROC",
+            "{P}{Dmm}Ch33_raw.PROC",
+            "{P}{Dmm}Ch34_raw.PROC",
+            "{P}{Dmm}Ch35_raw.PROC",
+            "{P}{Dmm}Ch36_raw.PROC",
+            "{P}{Dmm}Ch37_raw.PROC",
+            "{P}{Dmm}Ch38_raw.PROC",
+            "{P}{Dmm}Ch39_raw.PROC",
+            "{P}{Dmm}Ch40_raw.PROC",
+            "{P}{Dmm}Ch41_raw.PROC",
+            "{P}{Dmm}Ch42_raw.PROC",
+            "{P}{Dmm}Ch43_raw.PROC",
+            "{P}{Dmm}Ch44_raw.PROC",
+            "{P}{Dmm}Ch45_raw.PROC",
+            "{P}{Dmm}Ch46_raw.PROC",
+            "{P}{Dmm}Ch47_raw.PROC",
+            "{P}{Dmm}Ch48_raw.PROC",
+            "{P}{Dmm}Ch49_raw.PROC",
+            "{P}{Dmm}Ch50_raw.PROC",
+            "{P}{Dmm}Ch51_raw.PROC",
+            "{P}{Dmm}Ch52_raw.PROC",
+            "{P}{Dmm}Ch53_raw.PROC",
+            "{P}{Dmm}Ch54_raw.PROC",
+            "{P}{Dmm}Ch55_raw.PROC",
+            "{P}{Dmm}Ch56_raw.PROC",
+            "{P}{Dmm}Ch57_raw.PROC",
+            "{P}{Dmm}Ch58_raw.PROC",
+            "{P}{Dmm}Ch59_raw.PROC",
+            "{P}{Dmm}Ch60_raw.PROC"};
 
 /* Note:  dci and aci must be the last 2 modes.  These are defined for
    front panel use only. */
@@ -172,6 +289,32 @@ monitor dmm_chan2;
 evflag  dmm_chan2_mon;
 sync    dmm_chan2 dmm_chan2_mon;
 
+/* KG 2015-09-01 */
+int dmm_chan3;
+assign  dmm_chan3 to "{P}{Dmm}dmm_chan3.VAL";
+monitor dmm_chan3;
+evflag  dmm_chan3_mon;
+sync    dmm_chan3 dmm_chan3_mon;
+
+int dmm_chan4;
+assign  dmm_chan4 to "{P}{Dmm}dmm_chan4.VAL";
+monitor dmm_chan4;
+evflag  dmm_chan4_mon;
+sync    dmm_chan4 dmm_chan4_mon;
+
+int dmm_chan5;
+assign  dmm_chan5 to "{P}{Dmm}dmm_chan5.VAL";
+monitor dmm_chan5;
+evflag  dmm_chan5_mon;
+sync    dmm_chan5 dmm_chan5_mon;
+
+int dmm_chan6;
+assign  dmm_chan6 to "{P}{Dmm}dmm_chan6.VAL";
+monitor dmm_chan6;
+evflag  dmm_chan6_mon;
+sync    dmm_chan6 dmm_chan6_mon;
+
+
 int dmm_ch_range;
 assign  dmm_ch_range to "{P}{Dmm}dmm_ch_range.VAL";
 monitor dmm_ch_range;
@@ -202,7 +345,10 @@ evflag  init_dmm_mon;
 sync    init_dmm init_dmm_mon;
 
 int do_init;
-assign do_init to "{P}{Dmm}init_string.PROC";
+assign do_init to "{P}{Dmm}reset.PROC";
+/* KG 2015-9-2 */
+int do_init2;
+assign do_init2 to "{P}{Dmm}setconfig.PROC";
 
 string ch_close;  assign  ch_close to "{P}{Dmm}ch_close.VAL";
 string model; assign model to "{P}{Dmm}model.VAL";
@@ -251,9 +397,10 @@ ss mode_change {
             if (strcmp(model, "2000") == 0) {
 /* KG2015-0825 */
                strcpy(close_format, "rout:clos (@%d)");	
-             } else {
- /*              strcpy(close_format, "rout:clos (@1%2.2d)");	*/
-              strcpy(close_format, "dmm.close('1%03d')");
+             } else if (strcmp(model, "2700") == 0) {
+               strcpy(close_format, "rout:clos (@1%2.2d)");
+	     } else {
+		strcpy(close_format, "dmm.close('1%03d')");
             }
         } state monitor_mode_changes
     }
@@ -303,8 +450,42 @@ ss mode_change {
 
         when(efTestAndClear(dmm_chan2_mon) && (channels > 10)) {
             sprintf(ch_close, close_format, dmm_chan2+11);
+/* KG 2015-9-2 */
+printf("%s, ch_close2\n", ch_close);
             pvPut(ch_close);
             previous_chan = dmm_chan2+10;
+        } state monitor_mode_changes
+
+        when(efTestAndClear(dmm_chan3_mon) && (channels > 10)) {
+            sprintf(ch_close, close_format, dmm_chan3+21);
+/* KG 2015-9-2 */
+printf("%s, ch_close3\n", ch_close);
+            pvPut(ch_close);
+            previous_chan = dmm_chan3+20;
+        } state monitor_mode_changes
+ 
+       when(efTestAndClear(dmm_chan4_mon) && (channels > 10)) {
+            sprintf(ch_close, close_format, dmm_chan4+31);
+/* KG 2015-9-2 */
+printf("%s, ch_close4\n", ch_close);
+            pvPut(ch_close);
+            previous_chan = dmm_chan4+30;
+        } state monitor_mode_changes
+
+       when(efTestAndClear(dmm_chan5_mon) && (channels > 10)) {
+            sprintf(ch_close, close_format, dmm_chan5+41);
+/* KG 2015-9-2 */
+printf("%s, ch_close5\n", ch_close);
+            pvPut(ch_close);
+            previous_chan = dmm_chan5+40;
+        } state monitor_mode_changes
+
+       when(efTestAndClear(dmm_chan6_mon) && (channels > 10)) {
+            sprintf(ch_close, close_format, dmm_chan6+51);
+/* KG 2015-9-2 */
+printf("%s, ch_close6\n", ch_close);
+            pvPut(ch_close);
+            previous_chan = dmm_chan6+50;
         } state monitor_mode_changes
 
         when(efTestAndClear(init_dmm_mon)) {
@@ -315,6 +496,8 @@ ss mode_change {
                 init_dmm = 0;
                 pvPut(init_dmm);
                 pvPut(do_init);
+/* KG 2015-9-2 */
+                pvPut(do_init2);
             }
         } state monitor_mode_changes
     }
@@ -328,7 +511,9 @@ ss read_meter {
             previous_chan = -1;
             efClear(read_complete_mon);
             pvPut(do_init);
-        } state wait_read
+ /* KG 2015-9-2 */
+            pvPut(do_init2);
+       } state wait_read
     }
     state wait_read {
         when(efTestAndClear(done_read_mon) && (done_read == 1)) {
@@ -344,8 +529,15 @@ ss read_meter {
             /* Issue close channel if different */
             chan = dmm_chan;
             if (dmm_ch_range == 1) chan = dmm_chan2+10;
+            if (dmm_ch_range == 2) chan = dmm_chan3+20;
+            if (dmm_ch_range == 3) chan = dmm_chan4+30;
+            if (dmm_ch_range == 4) chan = dmm_chan5+40;
+            if (dmm_ch_range == 5) chan = dmm_chan6+50;		
+
             if (chan != previous_chan) {
                 sprintf(ch_close, close_format, chan+1);
+/* KG 2015-9-2 */
+printf("%s, ch_close in read_channel\n", ch_close);
                 pvPut(ch_close);
                 previous_chan = chan;
             }

@@ -26,7 +26,8 @@ DMM2k_registerRecordDeviceDriver pdbbase
 # cfg comms for Keithley 3706A controllers
 #drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
 #drvAsynIPPortConfigure("tsrv2-P4","10.10.2.54:4004")
-drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
+#drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
+drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183:5025")
 
 ## Load record instances
 #dbLoadTemplate "db/userHost.substitutions"
@@ -66,7 +67,7 @@ iocInit
 #seq &Keithley2kDMM, "P=13Keithley1:, Dmm=DMM1, channels=22, model=2700, stack=10000"
 #doAfterIocInit()
 #seq &Keithley2kDMM, "P=$(P), Dmm=$(R), channels=20, model=3706A"
-seq Keithley3706A, "P=$(P), Dmm=$(R), channels=20, model=3706A"
+seq Keithley3706A, "P=$(P), Dmm=$(R), channels=60, model=3706A"
 #seq sncExample, "P=$(P), Dmm=$(R), channels=20, model=3706A"
 
 cd ${TOP}
