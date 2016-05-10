@@ -23,7 +23,7 @@ program Keithley3706A ("P=XF:10IDD-BI, Dmm={DMM:2-K3706A}, channels=10, model=37
  *                   Added support for 20 channels.
  *                   Two new parameters in starting program:
  *                      channels: default=10, maximum=20
- *                      model:    default=2000, choices=2000 and 2700
+ *                      model:    default=2000, choices=2000 and 2700, and 3706A
  * 28-OCT-2002 MLR   Changed the order of the mode select and close commands in
  *                   multichannel mode.  Previously we were doing close first then
  *                   mode select.  This did not work in 4-wire ohms mode, must do
@@ -345,10 +345,9 @@ evflag  init_dmm_mon;
 sync    init_dmm init_dmm_mon;
 
 int do_init;
-assign do_init to "{P}{Dmm}reset.PROC";
-/* KG 2015-9-2 */
-int do_init2;
-assign do_init2 to "{P}{Dmm}setconfig.PROC";
+/* KG 2016-5-6 */
+assign do_init to "{P}{Dmm}doReset.PROC";	
+/* assign do_init to "{P}{Dmm}reset.PROC"; */	
 
 string ch_close;  assign  ch_close to "{P}{Dmm}ch_close.VAL";
 string model; assign model to "{P}{Dmm}model.VAL";
@@ -496,8 +495,6 @@ printf("%s, ch_close6\n", ch_close);
                 init_dmm = 0;
                 pvPut(init_dmm);
                 pvPut(do_init);
-/* KG 2015-9-2 */
-                pvPut(do_init2);
             }
         } state monitor_mode_changes
     }
@@ -511,8 +508,6 @@ ss read_meter {
             previous_chan = -1;
             efClear(read_complete_mon);
             pvPut(do_init);
- /* KG 2015-9-2 */
-            pvPut(do_init2);
        } state wait_read
     }
     state wait_read {
