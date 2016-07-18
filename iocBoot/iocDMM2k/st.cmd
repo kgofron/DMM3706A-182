@@ -7,7 +7,7 @@
 
 epicsEnvSet("ENGINEER",  "kgofron x5283")
 epicsEnvSet("LOCATION",  "740 IXS RG:D1")
-#epicsEnvSet("STREAM_PROTOCOL_PATH", ".:../protocols:$(PMACUTIL)/protocol")
+epicsEnvSet("STREAM_PROTOCOL_PATH", "../../DMM2kApp/Db")
 epicsEnvSet("KP_PORT",   "DMM3706A")
 epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
 epicsEnvSet("EPICS_CA_ADDR_LIST", "10.10.0.255")
@@ -26,8 +26,8 @@ DMM2k_registerRecordDeviceDriver pdbbase
 # cfg comms for Keithley 3706A controllers
 #drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
 #drvAsynIPPortConfigure("tsrv2-P4","10.10.2.54:4004")
-#drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
-drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183:5025")
+drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
+#drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183:5025")
 
 ## Load record instances
 #dbLoadTemplate "db/userHost.substitutions"

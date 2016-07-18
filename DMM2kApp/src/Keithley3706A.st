@@ -349,6 +349,9 @@ int do_init;
 assign do_init to "{P}{Dmm}doReset.PROC";	
 /* assign do_init to "{P}{Dmm}reset.PROC"; */	
 
+int reset;
+assign reset to "{P}{Dmm}reset.PROC";	
+
 string ch_close;  assign  ch_close to "{P}{Dmm}ch_close.VAL";
 string model; assign model to "{P}{Dmm}model.VAL";
 int channels; assign channels to "{P}{Dmm}channels.VAL";
@@ -434,20 +437,32 @@ ss mode_change {
             /* If 4-wire mode was selected open all channels */
             if (ch_mode_sel == 3) {
  /* KG 2015-8-26 */
- /*               sprintf(ch_close, "rout:open:all");	*/
+//                sprintf(ch_close, "rout:open:all");	
                 sprintf(ch_close, "channel.open('allslots')");
+                pvPut(ch_close);
+//                pvPut(reset);
+printf("%d, 4wireOhms\n", ch_mode_sel);
+                sprintf(ch_close, "dmm.setconfig('1%03d','fourwireohms')",dmm_chan2+11);
                 pvPut(ch_close);
                 previous_chan = -1;
             }
         } state monitor_mode_changes
 
         when(efTestAndClear(dmm_chan_mon)) {
+            if (ch_mode_sel == 3) {
+	       sprintf(ch_close, "dmm.setconfig('1%03d','fourwireohms')",dmm_chan2+1);
+	       pvPut(ch_close);
+	    }	    
             sprintf(ch_close, close_format, dmm_chan+1);
             pvPut(ch_close);
             previous_chan = dmm_chan;
         } state monitor_mode_changes
 
         when(efTestAndClear(dmm_chan2_mon) && (channels > 10)) {
+            if (ch_mode_sel == 3) {
+	       sprintf(ch_close, "dmm.setconfig('1%03d','fourwireohms')",dmm_chan2+11);
+	       pvPut(ch_close);
+	    }	    
             sprintf(ch_close, close_format, dmm_chan2+11);
 /* KG 2015-9-2 */
 printf("%s, ch_close2\n", ch_close);
@@ -456,6 +471,10 @@ printf("%s, ch_close2\n", ch_close);
         } state monitor_mode_changes
 
         when(efTestAndClear(dmm_chan3_mon) && (channels > 10)) {
+            if (ch_mode_sel == 3) {
+	       sprintf(ch_close, "dmm.setconfig('1%03d','fourwireohms')",dmm_chan2+21);
+	       pvPut(ch_close);
+	    }	    
             sprintf(ch_close, close_format, dmm_chan3+21);
 /* KG 2015-9-2 */
 printf("%s, ch_close3\n", ch_close);
@@ -548,9 +567,10 @@ printf("%s, ch_close in read_channel\n", ch_close);
             /* Channels 21 and 22 on the model 2700 can only do DC and AC current, and these
                are the first two choices, different from all other channels
             */
-            if ((strcmp(model, "2700") == 0) && (scan_chan > 19)) {
+/*            if ((strcmp(model, "2700") == 0) && (scan_chan > 19)) {
                 mode = mode + 13;
             }
+*/
             if (mode != previous_mode) {
                 pvPut(dmm_modes[mode]);
                 previous_mode = mode;
