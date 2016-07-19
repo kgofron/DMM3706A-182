@@ -476,7 +476,7 @@ record(stringout, "$(P)$(Dmm)conf_aci") {
 record(ao, "$(P)$(Dmm)conf_ohm4w") {
   field(DTYP, "stream")
   field(VAL, "1")
-  field(OUT, "@DMM3706A.proto setDMM3706Mode('fourwireohms','1000:1030','myfres') $(PORT)")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(fourwireohms,1000,1030,myfres) $(PORT)")
 }
 
 record(stringout, "$(P)$(Dmm)conf_ohm2w") {
