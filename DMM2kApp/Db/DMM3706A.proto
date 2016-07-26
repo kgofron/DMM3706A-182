@@ -1,0 +1,23 @@
+#Protocol file for Keithley 3706A scanner/multimeter
+
+Terminator = LF;
+ReplyTimeout = 10000; 
+ReadTimeout = 10000;  
+extrainput = Ignore;
+
+setDMM3706Mode {
+       out "channel.open('allslots')";
+       out "dmm.func='\$1'";    
+       out "dmm.nplc=10";    
+#       out "dmm.range=1000"; 
+       out "dmm.autorange=dmm.ON"; 
+       out "dmm.offsetcompensation=dmm.ON"; 
+       out "dmm.drycircuit=dmm.ON"; 
+#       out "\$1= %g";
+       out "dmm.configure.set('\$4')"; 
+       out "dmm.setconfig('\$2:\$3','\$1')";  
+}
+
+setDMM3706Val {
+       out "\$1= %g";    
+}
