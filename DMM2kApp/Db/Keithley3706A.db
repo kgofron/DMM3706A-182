@@ -47,6 +47,44 @@ record(sseq, "$(P)$(Dmm)doReset") {
   field(WAIT2, "Wait")
 }
 
+record(ai, "$(P)$(Dmm)ch_start") {
+  field(VAL, "1000")
+  field(PREC, "0")
+}
+
+record(ai, "$(P)$(Dmm)ch_end") {
+  field(VAL, "1060")
+  field(PREC, "0")
+}
+
+record(ao, "$(P)$(Dmm)nplc") {
+  field(DESC, "Set integration rate in line cycles")
+  field(EGU,  "linecycles")
+  field(LOPR, "0.0005")
+  field(HOPR, "15")
+  field(EGUL, "0.0005")
+  field(EGUF, "15")
+  field(DRVL, "0.0005")
+  field(DRVH, "15")
+  field(PINI, "YES")
+  field(VAL, "2")
+  field(OUT,  "@DMM3706.proto setDMM3706Val(dmm.nplc) DMM3706")
+#  field(PREC, "0")
+}
+
+record(ao, "$(P)$(Dmm)range") {
+  field(DESC, "Set range value")
+  field(VAL, "2")
+  field(OUT,  "@DMM3706.proto setDMM3706Val(dmm.range) DMM3706")
+#  field(PREC, "0")
+}
+
+record(ao, "$(P)$(Dmm)scancount") {
+  field(VAL, "2")
+  field(OUT,  "@DMM3706.proto setDMM3706Val(scan.scancount) DMM3706")
+  field(PREC, "0")
+}
+
 record(sseq, "$(P)$(Dmm)initScan") {
   field(LNK1, "$(P)$(Dmm)conf_str CA")
   field(LNK2, "$(P)$(Dmm)conf_str CA")
@@ -139,14 +177,14 @@ record(sseq, "$(P)$(Dmm)initScan3") {
 #  field(FLNK, "$(P)$(Dmm)dmm_get_wf")
 #  field(PREC, "2")
 #}
-record(stringout, "$(P)$(Dmm)command") {
-  field(FLNK, "$(P)$(Dmm)reply")
-}
+#record(stringout, "$(P)$(Dmm)command") {
+#  field(FLNK, "$(P)$(Dmm)reply")
+#}
 
-record(stringin, "$(P)$(Dmm)reply") {
-  field(DTYP, "asynOctetWriteRead")
-  field(INP, "@asyn($(PORT) 0) $(P)$(Dmm)command")
-}
+#record(stringin, "$(P)$(Dmm)reply") {
+#  field(DTYP, "asynOctetWriteRead")
+#  field(INP, "@asyn($(PORT) 0) $(P)$(Dmm)command")
+#}
 
 record(stringout, "$(P)$(Dmm)test") {
   field(FLNK, "$(P)$(Dmm)dmm_get_wf")
@@ -443,28 +481,48 @@ record(stringout, "$(P)$(Dmm)ch_close") {
   field(OUT, "@asyn($(PORT))TERM=0a")
 }
 
-record(stringout, "$(P)$(Dmm)conf_dcv") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='dcvolts'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_dcv") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='dcvolts'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_dcv") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(dcvolts,1000,1060,mydcv) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_acv") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='acvolts'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_acv") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='acvolts'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_acv") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(acvolts,1000,1060,myacv) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_dci") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='dccurrent'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_dci") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='dccurrent'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_dci") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(dccurrent,1000,1060,mydci) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_aci") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='accurrent'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_aci") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='accurrent'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_aci") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(accurrent,1000,1060,myaci) $(PORT)")
 }
 
 #record(stringout, "$(P)$(Dmm)conf_ohm4w") {
@@ -472,75 +530,124 @@ record(stringout, "$(P)$(Dmm)conf_aci") {
 #  field(VAL, "dmm.func='fourwireohms'")
 #  field(OUT, "@asyn($(PORT))TERM=0a")
 #}
-
 record(ao, "$(P)$(Dmm)conf_ohm4w") {
   field(DTYP, "stream")
   field(VAL, "1")
   field(OUT, "@DMM3706A.proto setDMM3706Mode(fourwireohms,1000,1030,myfres) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_ohm2w") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='twowireohms'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_ohm2w") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='twowireohms'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_ohm2w") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(twowireohms,1000,1060,mytres) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_freq") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='frequency'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_freq") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='frequency'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_freq") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(frequency,1000,1060,myfreq) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempj") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempj") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempj") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempj) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempk") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempk") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempk") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempk) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempn") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempn") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempn") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempn) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempt") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempt") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempt") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempt) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempe") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempe") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempe") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempe) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempr") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempr") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempr") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempr) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_temps") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_temps") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_temps") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytemps) $(PORT)")
 }
 
-record(stringout, "$(P)$(Dmm)conf_tempb") {
-  field(DTYP, "asyn so stringParm")
-  field(VAL, "dmm.func='temperature'")
-  field(OUT, "@asyn($(PORT))TERM=0a")
+#record(stringout, "$(P)$(Dmm)conf_tempb") {
+#  field(DTYP, "asyn so stringParm")
+#  field(VAL, "dmm.func='temperature'")
+#  field(OUT, "@asyn($(PORT))TERM=0a")
+#}
+record(ao, "$(P)$(Dmm)conf_tempb") {
+  field(DTYP, "stream")
+  field(VAL, "1")
+  field(OUT, "@DMM3706A.proto setDMM3706Mode(temperature,1000,1060,mytempb) $(PORT)")
 }
 
 #! Further lines contain data used by VisualDCT
-#! View(1306,204,1.0)
+#! View(0,0,1.0)
 #! Record("$(P)$(Dmm)model",1120,330,0,0,"$(P)$(Dmm)model")
 #! Record("$(P)$(Dmm)channels",1120,250,0,0,"$(P)$(Dmm)channels")
 #! Record("$(P)$(Dmm)init_dmm",40,663,0,0,"$(P)$(Dmm)init_dmm")
@@ -556,6 +663,11 @@ record(stringout, "$(P)$(Dmm)conf_tempb") {
 #! Link("$(P)$(Dmm)doReset.LNK1","$(P)$(Dmm)reset.VAL")
 #! Field("$(P)$(Dmm)doReset.LNK2",16777215,1,"$(P)$(Dmm)doReset.LNK2")
 #! Link("$(P)$(Dmm)doReset.LNK2","$(P)$(Dmm)setconfig.VAL")
+#! Record("$(P)$(Dmm)ch_start",40,1076,0,0,"$(P)$(Dmm)ch_start")
+#! Record("$(P)$(Dmm)ch_end",220,1076,0,0,"$(P)$(Dmm)ch_end")
+#! Record("$(P)$(Dmm)nplc",400,1076,0,0,"$(P)$(Dmm)nplc")
+#! Record("$(P)$(Dmm)range",580,1076,0,0,"$(P)$(Dmm)range")
+#! Record("$(P)$(Dmm)scancount",760,1076,0,0,"$(P)$(Dmm)scancount")
 #! Record("$(P)$(Dmm)initScan",2380,19,0,0,"$(P)$(Dmm)initScan")
 #! Field("$(P)$(Dmm)initScan.LNK1",16777215,0,"$(P)$(Dmm)initScan.LNK1")
 #! Link("$(P)$(Dmm)initScan.LNK1","$(P)$(Dmm)conf_str.VAL")
@@ -669,9 +781,9 @@ record(stringout, "$(P)$(Dmm)conf_tempb") {
 #! Record("$(P)$(Dmm)conf_acv",40,162,0,0,"$(P)$(Dmm)conf_acv")
 #! Record("$(P)$(Dmm)conf_dci",40,282,0,0,"$(P)$(Dmm)conf_dci")
 #! Record("$(P)$(Dmm)conf_aci",40,402,0,0,"$(P)$(Dmm)conf_aci")
-#! Record("$(P)$(Dmm)conf_ohm4w",220,162,0,0,"$(P)$(Dmm)conf_ohm4w")
-#! Record("$(P)$(Dmm)conf_ohm2w",220,42,0,0,"$(P)$(Dmm)conf_ohm2w")
-#! Record("$(P)$(Dmm)conf_freq",40,522,0,0,"$(P)$(Dmm)conf_freq")
+#! Record("$(P)$(Dmm)conf_ohm4w",220,282,0,0,"$(P)$(Dmm)conf_ohm4w")
+#! Record("$(P)$(Dmm)conf_ohm2w",220,162,0,0,"$(P)$(Dmm)conf_ohm2w")
+#! Record("$(P)$(Dmm)conf_freq",220,42,0,0,"$(P)$(Dmm)conf_freq")
 #! Record("$(P)$(Dmm)conf_tempj",400,42,0,0,"$(P)$(Dmm)conf_tempj")
 #! Record("$(P)$(Dmm)conf_tempk",400,162,0,0,"$(P)$(Dmm)conf_tempk")
 #! Record("$(P)$(Dmm)conf_tempn",400,282,0,0,"$(P)$(Dmm)conf_tempn")

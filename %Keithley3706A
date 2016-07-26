@@ -16,3 +16,13 @@ Empty Slot
 Empty Slot
 Empty Slot
 Empty Slot
+
+
+caput XF:10IDB-BI{DMM:1-K3706A}Ch19_calc.CALC  "(A-1000)/(3.9083e-3*1000)"
+
+Rt = R0 * (1 + A*T + B*T^2 + C*(T - 100)*T^3)
+A=3.9083e-3
+B= - 5.7750e-7
+C = { -4.1830e-12, T < 0 deg C}
+C = {0.0, T >= 0 deg C}
+R0=100 for PT100; R0=1000 for PT1000
