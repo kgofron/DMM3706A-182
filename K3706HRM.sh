@@ -1,0 +1,68 @@
+#!/bin/bash
+# Channels 1-6 are DC volts: capacitive sensors
+
+# 4 wire Ohm temperature sensors mode selection 
+caput XF:10IDB-BI{DMM:1-K3706A}ch19_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch20_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch21_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch22_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch23_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch24_mode_sel.VAL 3
+# Temperature calibration for 4 wire Ohm temperature sensors.
+caput XF:10IDB-BI{DMM:1-K3706A}Ch19_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch20_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch21_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch22_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch23_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch24_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+
+#Disable channels
+caput XF:10IDB-BI{DMM:1-K3706A}Ch7_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch8_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch9_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch10_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch11_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch12_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch13_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch14_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch15_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch16_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch17_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch18_on_off.VAL 1
+#
+caput XF:10IDB-BI{DMM:1-K3706A}Ch25_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch26_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch27_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch28_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch29_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch30_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch31_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch32_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch33_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch34_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch35_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch36_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch37_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch38_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch39_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch40_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch41_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch42_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch43_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch44_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch45_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch46_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch47_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch48_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch49_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch50_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch51_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch52_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch53_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch54_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch55_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch56_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch57_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch58_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch59_on_off.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}Ch60_on_off.VAL 1
