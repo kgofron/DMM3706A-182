@@ -72,4 +72,5 @@ seq Keithley3706A, "P=$(P), Dmm=$(R), channels=60, model=3706A"
 
 cd ${TOP}
 dbl > ./records.dbl
-#system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
+system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
+system "/epics/iocs/DMM3706A-182/K3706HRM.sh"

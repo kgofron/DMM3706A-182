@@ -8,6 +8,10 @@ caput XF:10IDB-BI{DMM:1-K3706A}ch21_mode_sel.VAL 3
 caput XF:10IDB-BI{DMM:1-K3706A}ch22_mode_sel.VAL 3
 caput XF:10IDB-BI{DMM:1-K3706A}ch23_mode_sel.VAL 3
 caput XF:10IDB-BI{DMM:1-K3706A}ch24_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch25_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch26_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch27_mode_sel.VAL 3
+caput XF:10IDB-BI{DMM:1-K3706A}ch28_mode_sel.VAL 3
 # Temperature calibration for 4 wire Ohm temperature sensors.
 caput XF:10IDB-BI{DMM:1-K3706A}Ch19_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
 caput XF:10IDB-BI{DMM:1-K3706A}Ch20_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
@@ -15,6 +19,12 @@ caput XF:10IDB-BI{DMM:1-K3706A}Ch21_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
 caput XF:10IDB-BI{DMM:1-K3706A}Ch22_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
 caput XF:10IDB-BI{DMM:1-K3706A}Ch23_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
 caput XF:10IDB-BI{DMM:1-K3706A}Ch24_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch25_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch26_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch27_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch28_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch29_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
+caput XF:10IDB-BI{DMM:1-K3706A}Ch30_calc.CALC "(ABS(A)/1000-1)/3.9083e-3"
 
 #Disable channels
 caput XF:10IDB-BI{DMM:1-K3706A}Ch7_on_off.VAL 1
@@ -30,10 +40,10 @@ caput XF:10IDB-BI{DMM:1-K3706A}Ch16_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch17_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch18_on_off.VAL 1
 #
-caput XF:10IDB-BI{DMM:1-K3706A}Ch25_on_off.VAL 1
-caput XF:10IDB-BI{DMM:1-K3706A}Ch26_on_off.VAL 1
-caput XF:10IDB-BI{DMM:1-K3706A}Ch27_on_off.VAL 1
-caput XF:10IDB-BI{DMM:1-K3706A}Ch28_on_off.VAL 1
+#caput XF:10IDB-BI{DMM:1-K3706A}Ch25_on_off.VAL 1
+#caput XF:10IDB-BI{DMM:1-K3706A}Ch26_on_off.VAL 1
+#caput XF:10IDB-BI{DMM:1-K3706A}Ch27_on_off.VAL 1
+#caput XF:10IDB-BI{DMM:1-K3706A}Ch28_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch29_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch30_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch31_on_off.VAL 1
@@ -66,3 +76,7 @@ caput XF:10IDB-BI{DMM:1-K3706A}Ch57_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch58_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch59_on_off.VAL 1
 caput XF:10IDB-BI{DMM:1-K3706A}Ch60_on_off.VAL 1
+
+# Set Multimde and scan rate
+caput XF:10IDB-BI{DMM:1-K3706A}single_multi.VAL 1
+caput XF:10IDB-BI{DMM:1-K3706A}scanner.SCAN 3
