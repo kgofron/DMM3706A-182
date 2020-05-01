@@ -9,6 +9,7 @@ bin/
 lib/
 include/
 records.dbl
-
+.gitignore
+.git/
 syntax: regexp
 ^pmc/
