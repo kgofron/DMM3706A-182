@@ -26,7 +26,8 @@ DMM2k_registerRecordDeviceDriver pdbbase
 # cfg comms for Keithley 3706A controllers
 #drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
 #drvAsynIPPortConfigure("tsrv2-P4","10.10.2.54:4004")
-drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
+#drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
+drvAsynIPPortConfigure("$(KP_PORT)","10.66.74.182:5025")
 #drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183:5025")
 
 ## Load record instances
