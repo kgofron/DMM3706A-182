@@ -21,11 +21,22 @@
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
+SUPPORT=/epics/src/Deb9/support
+
 # If using the sequencer, point SNCSEQ at its top directory:
-SNCSEQ=$(EPICS_BASE)/../modules/soft/seq
+#SNCSEQ=$(EPICS_BASE)/../modules/soft/seq
+SNCSEQ=$(SUPPORT)/seq
+
+# ASYN - for device/driver support
+ASYN=$(SUPPORT)/asyn
+CALC=$(SUPPORT)/calc
+IP=$(SUPPORT)/ip
+DEVIOCSTATS=$(SUPPORT)/iocStats
+CAPUTLOG=$(SUPPORT)/caPutLog
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-EPICS_BASE=/usr/lib/epics
+#EPICS_BASE=/usr/lib/epics
+EPICS_BASE=/epics/src/Deb9/base
 
 # Set RULES here if you want to take build rules from somewhere
 # other than EPICS_BASE:

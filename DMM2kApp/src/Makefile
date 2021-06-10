@@ -51,6 +51,8 @@ DMM2k_DBD += ipSupport.dbd
 DMM2k_DBD += calcSupport.dbd
 #DMM2k_DBD += sseqRecord.dbd
 DMM2k_DBD += stream.dbd
+DMM2k_DBD += devIocStats.dbd
+DMM2k_DBD += caPutLog.dbd
 
 # DMM2k_registerRecordDeviceDriver.cpp derives from DMM2k.dbd
 DMM2k_SRCS += DMM2k_registerRecordDeviceDriver.cpp
@@ -71,6 +73,8 @@ DMM2k_LIBS += ip
 DMM2k_LIBS += asyn
 DMM2k_LIBS += seq pv calc
 DMM2k_LIBS += stream
+DMM2k_LIBS += devIocStats
+DMM2k_LIBS += caPutLog
 
 # NOTE: To build SNL programs, SNCSEQ must be defined
 # in the <top>/configure/RELEASE file

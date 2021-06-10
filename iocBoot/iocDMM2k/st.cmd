@@ -4,13 +4,12 @@
 ## everywhere it appears in this file
 
 < envPaths
+< /epics/common/xf10idb-ioc1-netsetup.cmd
 
 epicsEnvSet("ENGINEER",  "kgofron x5283")
 epicsEnvSet("LOCATION",  "740 IXS RG:D1")
 epicsEnvSet("STREAM_PROTOCOL_PATH", "../../DMM2kApp/Db")
 epicsEnvSet("KP_PORT",   "DMM3706A")
-epicsEnvSet("EPICS_CA_AUTO_ADDR_LIST", "NO")
-epicsEnvSet("EPICS_CA_ADDR_LIST", "10.10.0.255")
 
 epicsEnvSet("P",         "XF:10IDB-BI")
 epicsEnvSet("R",         "{DMM:1-K3706A}")
@@ -24,11 +23,11 @@ DMM2k_registerRecordDeviceDriver pdbbase
 
 ############ Asyn Communication Config ############
 # cfg comms for Keithley 3706A controllers
-#drvAsynIPPortConfigure("tsrv2-P3","10.10.2.54:4003")
-#drvAsynIPPortConfigure("tsrv2-P4","10.10.2.54:4004")
-#drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.182:5025")
+#drvAsynIPPortConfigure("tsrv2-P3","xf10idb-tsrv2.nsls2.bnl.local:4003")
+#drvAsynIPPortConfigure("tsrv2-P4","xf10idb-tsrv2.nsls2.bnl.local:4004")
+#drvAsynIPPortConfigure("$(KP_PORT)","xf10id-vm1.nsls2.bnl.local:5025")
 drvAsynIPPortConfigure("$(KP_PORT)","10.66.74.182:5025")
-#drvAsynIPPortConfigure("$(KP_PORT)","10.10.2.183:5025")
+#drvAsynIPPortConfigure("$(KP_PORT)","xf10id-vm2.nsls2.bnl.local:5025")
 
 ## Load record instances
 #dbLoadTemplate "db/userHost.substitutions"
@@ -47,6 +46,7 @@ dbLoadTemplate("db/Keithley3706A.substitutions")
 
 ### devIocStats
 #dbLoadRecords("${EPICS_BASE}/db/iocAdminSoft.db", "IOC=XF:10IDB-CT{DMM:1}")
+dbLoadRecords("$(DEVIOCSTATS)/db/iocAdminSoft.db", "IOC=XF:10IDB-CT{DMM:1}")
 ###################################################
 
 # asyn debug traces
@@ -73,5 +73,5 @@ seq Keithley3706A, "P=$(P), Dmm=$(R), channels=60, model=3706A"
 
 cd ${TOP}
 dbl > ./records.dbl
-system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
+#system "cp ./records.dbl /cf-update/$HOSTNAME.$IOCNAME.dbl"
 system "/epics/iocs/DMM3706A-182/K3706HRM.sh"
